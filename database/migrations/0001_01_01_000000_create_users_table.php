@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id('id_user');
             $table->string('nama_lengkap');
             $table->string('username')->unique();
-            $table->timestamp('password')->nullable();
-            $table->enum('role', ['admin', 'petugas', 'peminjaman'])->default('peminjaman');
+            $table->string('password')->nullable();
+            $table->enum('role', ['admin', 'petugas', 'peminjam'])->default('peminjam');
             $table->rememberToken();
             $table->timestamps();
         });

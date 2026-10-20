@@ -22,10 +22,14 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
-    protected $table = "users";
+    protected $table = 'users';
+
     protected $primaryKey = 'id_user';
+
     protected $fillable = ['nama_lengkap', 'username', 'password', 'role'];
+
     protected $hidden = ['password', 'remember_token'];
+
     protected function casts(): array
     {
         return [
@@ -35,8 +39,9 @@ class User extends Authenticatable
 
     public function peminjaman()
     {
-        return $this->hasMany(Peminjaman::class, 'id_peminjaman', 'id_user');
+        return $this->hasMany(Peminjaman::class, 'id_peminjam', 'id_user');
     }
+
     public function log()
     {
         return $this->hasMany(LogAktivitas::class, 'id_user', 'id_user');
