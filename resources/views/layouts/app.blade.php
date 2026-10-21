@@ -25,13 +25,13 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('alat.index') }}">Alat</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.peminjaman.index') }}">Peminjaman</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.pengembalian.index') }}">Pengembalian</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Log Aktivitas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('log.index') }}">Log Aktivitas</a></li>
                     @elseif (auth()->user()->role === 'petugas')
                     <li class="nav-item"><a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('alat.daftar') }}">Daftar Alat</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('peminjaman.persetujuan') }}">Persetujuan Peminjaman</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('pengembalian.pantau') }}">Pantau Pengembalian</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Laporan</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('laporan.index') }}">Laporan</a></li>
                     @elseif (auth()->user()->role === 'peminjam')
                     <li class="nav-item"><a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('alat.daftar') }}">Daftar Alat</a></li>

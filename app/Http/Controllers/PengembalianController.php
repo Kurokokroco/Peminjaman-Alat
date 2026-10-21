@@ -66,7 +66,7 @@ class PengembalianController extends Controller
                 $peminjaman->pengembalian()->create([
                     'tgl_kembali' => $tglKembali,
                     'hari_terlambat' => $hariTerlambat,
-                    'denda' => Pengembalian::hitungDenda($hariTerlambat),
+                    'denda' => Pengembalian::hitungDenda($peminjaman->tgl_rencana_kembali, $tglKembali),
                 ]);
                 $peminjaman->update(['status' => 'dikembalikan']);
                 LogAktivitas::catat('mengembalikan alat');
@@ -160,7 +160,10 @@ class PengembalianController extends Controller
                 $pengembalian->update([
                     'tgl_kembali' => $data['tgl_kembali'],
                     'hari_terlambat' => $hariTerlambat,
-                    'denda' => Pengembalian::hitungDenda($hariTerlambat),
+                    'denda' => Pengembalian::hitungDenda(
+                        $peminjaman->tgl_rencana_kembali,
+                        $data['tgl_kembali']
+                    ),
                 ]);
                 LogAktivitas::catat('mengubah data pengembalian');
             });

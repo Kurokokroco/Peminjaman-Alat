@@ -478,7 +478,7 @@ class PeminjamanController extends Controller
                 [
                     'tgl_kembali' => $tglKembali,
                     'hari_terlambat' => $hariTerlambat,
-                    'denda' => Pengembalian::hitungDenda($hariTerlambat),
+                    'denda' => Pengembalian::hitungDenda($peminjaman->tgl_rencana_kembali, $tglKembali),
                 ]
             );
 

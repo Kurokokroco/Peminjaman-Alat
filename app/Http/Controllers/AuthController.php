@@ -23,10 +23,7 @@ class AuthController extends Controller
         if (Auth::attempt($data)) {
             $request->session()->regenerate();
 
-            LogAktivitas::create([
-                'id_user' => Auth::id(),
-                'aktivitas' => 'login ke aplikasi',
-            ]);
+            LogAktivitas::catat('login ke aplikasi');
 
             return redirect()->route('dashboard');
         }
@@ -36,10 +33,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        LogAktivitas::create([
-            'id_user' => Auth::id(),
-            'aktivitas' => 'logout dari aplikasi',
-        ]);
+        LogAktivitas::catat('logout dari aplikasi');
 
         Auth::logout();
         $request->session()->invalidate();

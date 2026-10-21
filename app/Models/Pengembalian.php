@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Pengembalian extends Model
 {
@@ -23,9 +24,20 @@ class Pengembalian extends Model
             : 0;
     }
 
-    public static function hitungDenda(int $hariTerlambat): int
+    public static function hitungDenda(string $tglRencanaKembali, string $tglKembali): int
     {
-        return $hariTerlambat * (int) config('aplikasi.denda_per_hari');
+        $tarif = (int) config('aplikasi.denda_per_hari');
+
+        if (DB::connection()->getDriverName() === 'mysql') {
+            $hasil = DB::selectOne(
+                'SELECT fn_hitung_denda(?, ?, ?) AS denda',
+                [$tglRencanaKembali, $tglKembali, $tarif]
+            );
+
+            return (int) $hasil->denda;
+        }
+
+        return self::hitungHariTerlambat($tglRencanaKembali, $tglKembali) * $tarif;
     }
 
     public function peminjaman()

@@ -14,7 +14,7 @@ class PerhitunganDendaTest extends TestCase
         $hariTerlambat = Pengembalian::hitungHariTerlambat('2026-10-10', '2026-10-12');
 
         $this->assertSame(2, $hariTerlambat);
-        $this->assertSame(10000, Pengembalian::hitungDenda($hariTerlambat));
+        $this->assertSame(10000, Pengembalian::hitungDenda('2026-10-10', '2026-10-12'));
     }
 
     public function test_tidak_mengenakan_denda_jika_kembali_tepat_waktu_atau_lebih_awal(): void

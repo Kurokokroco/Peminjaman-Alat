@@ -4,6 +4,8 @@ use App\Http\Controllers\AlatController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\LogAktivitasController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PengembalianController;
 use App\Http\Controllers\UserController;
@@ -35,6 +37,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/pantau-pengembalian', [PengembalianController::class, 'pantau'])->name('pengembalian.pantau');
     });
 
+    Route::middleware('role:petugas,admin')->group(function () {
+        Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
+        Route::post('/laporan/cetak', [LaporanController::class, 'cetak'])->name('laporan.cetak');
+    });
+
     Route::middleware('role:admin')->prefix('admin')->group(function () {
         Route::resource('user', UserController::class)->except('show');
         Route::resource('kategori', KategoriController::class)->except('show');
@@ -53,5 +60,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/pengembalian/{pengembalian}/edit', [PengembalianController::class, 'edit'])->name('admin.pengembalian.edit');
         Route::put('/pengembalian/{pengembalian}', [PengembalianController::class, 'update'])->name('admin.pengembalian.update');
         Route::delete('/pengembalian/{pengembalian}', [PengembalianController::class, 'destroy'])->name('admin.pengembalian.destroy');
+        Route::get('/log-aktivitas', [LogAktivitasController::class, 'index'])->name('log.index');
     });
 });
